@@ -1,4 +1,4 @@
-## CSS
+# CSS
 
 
 ### Alphabetise
@@ -6,16 +6,16 @@
 Alphabetise the properties:
 
 ```css
-	#tag {
-	    background-color: #000
-	    border: 1px solid #ccc;
-	    font-size: 22px;
-	    font-weight: 700;
-	    height: 120px;
-	    padding: 10px 20px;
-	    text-align: center;
-	    width: 300px;
-	}
+#tag {
+    background-color: #000
+    border: 1px solid #ccc;
+    font-size: 22px;
+    font-weight: 700;
+    height: 120px;
+    padding: 10px 20px;
+    text-align: center;
+    width: 300px;
+}
 ```
 
 ### Class and ID Names
@@ -48,7 +48,7 @@ Each indentation level is made up of four spaces. Do not use tabs. (Please set y
 .tag_name {color: #fff; background-color: #000;}
 ```
 
-Rules inside of `@media` must be indented an additional level.
+Rules inside of ``@media`` must be indented an additional level.
 
 ```css
 /* Good */
@@ -470,4 +470,4 @@ However when extending a component and styling the inner elements, try to use th
 ### Comments
 
 * Comments should be used in CSS to separate the different section in the file, and highlight anything that you or other developers may require at a later date.
-* End each main block with ```css // END #tag_name ``` or ```css // END .tag_name ``` for easier readability.
+* End each main block with ``css // END #tag_name `` or ``css // END .tag_name `` for easier readability.
