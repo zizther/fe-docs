@@ -11,6 +11,7 @@ A good guide to follow is the [YUI best practice](http://developer.yahoo.com/per
 When developing a website, keep these points in mind:
 
 * Use the guidelines provided in this document
+* All indentation should be 1 tab (4 spaces) in all languages
 * Develop the site to the design(s) provided
 * Make it as pixel perfect as possible
 * It must have a good user experience

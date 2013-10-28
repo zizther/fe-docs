@@ -1,5 +1,9 @@
 # CSS
 
+Maido uses [SASS](http://sass-lang.com/) and [Compass](http://compass-style.org/).
+
+---
+
 
 ### Alphabetise
 

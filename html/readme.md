@@ -3,6 +3,8 @@
 			
 This document's primary motivation is two- fold: 1) code consistency and 2) best practices. By maintaining consistency in coding styles and conventions, we can ease the burden of legacy code maintenance, and mitigate risk of breakage in the future. By adhering to best practices, we ensure optimized page loading, performance and maintainable code.
 
+---
+
 ## General Guidelines
 
 * For all code languages, using tab (4 spaces)indentation.
@@ -140,12 +142,11 @@ The font formats included in the specification are:
 
 [Bulletproof @font-face](http://www.fontspring.com/blog/further-hardening-of-the-bulletproof-syntax)
 
-Use either Typekit or Google WebFonts over Cufon or Scalable Inman Flash Replacement (sIFR).
+Use either Typekit or Google WebFonts. Don't use Cufon or Scalable Inman Flash Replacement (sIFR).
 
-
-
-
-## JavaScript
+Be aware of FOUC/FOUT (Flash of unstyled content/text). Read more about this:
+[Typekit](http://help.typekit.com/customer/portal/articles/6852-controlling-the-flash-of-unstyled-text-or-fout-using-font-events)
+[Paul Irish](http://www.paulirish.com/2009/fighting-the-font-face-fout/)
 
 
 ## Accessibility
@@ -153,3 +154,104 @@ Use either Typekit or Google WebFonts over Cufon or Scalable Inman Flash Replace
 The HTML mark-up should comply with [UK web accessibility law](http://www.rnib.org.uk/professionals/webaccessibility/lawsandstandards/Pages/uk_law.aspx) and should follow the [Web Content Accessibility Guidelines](http://www.w3.org/WAI/intro/wcag) as closely as possible.
 
 [W3C checklist of checkpoints for accessibility](http://www.w3.org/TR/WCAG10/full-checklist.html)
+
+
+## Performance
+
+As we continue to push the limits of what the web can do, it remains just as important a web page can be used with minimal effort or wait time. The main points to focus on are user experience and user perception.
+
+#### Optimize Delivery of CSS and JavaScript
+
+There are many optimisations that should be done for serving CSS and javascript in production:
+
+* Optimse images for web.
+* Set caching headers appropriately.
+* Consider a cookie-less subdomain for static assets
+* Avoid inline ``<script>`` blocks. They block rendering and are quite devastating to page load time.
+* Avoid calling JS function inline.
+* CSS should be located in the ``<head>`` of the document, Javascript should be right before the ``</body>`` tag.
+* Both CSS and JavaScript should be served minified.
+* Both should be served using gzip on the wire.
+* Reduce the number of HTTP requests.
+
+#### Optimize JavaScript execution
+
+During a page load, there is typically a lot of script waiting to execute, but you can prioritise it. This order prioritizes based on user response:
+
+1. Script that changes the visible nature of the page needs to fire absolutely first. This includes any font adjustment or box layout.
+2. Page content initialization.
+3. Page header, topnav and footer initialization.
+4. Attaching event handlers.
+5. Omniture, Doubleclick, and other 3rd party scripts.
+
+#### Leverage CSS Sprites
+
+CSS Sprites basically take a number of image assets and merge them together into a singular image file. Each part of it is revealed using CSS background-position.
+
+Using sprites reduces total page weight and reduces HTTP connections which speeds up page load.
+
+Many developers use a vertically-oriented sprite in addition to the primary sprite. This vertical sprite will be less than or equal to 100px wide (and tall) and contain icons that are typically placed next to text, such as list item bullets or call to action links and buttons.
+
+The one consideration is to not make sprites too large, something over 1000px in either direction will end up using a sizeable amount of memory. Read more on [when to use sprites and memory usage here](http://blog.vlad1.com/2009/06/22/to-sprite-or-not-to-sprite/), and for more general tips and techniques on creating sprites check out the [Mozilla Dev Blog](http://blog.mozilla.com/webdev/2009/03/27/css-spriting-tips/).
+
+#### Shard resources across domains
+
+Static content should certainly be served from a domain different than the one that serves HTML. This is optimal so that there are no extra cookies headers on all static content requests. It's also much easier to write caching rules for the entire domain. (Also any subdomains of the current domain will inherit domain cookies, so it's worth using a completely new domain).
+
+However with enough assets (especially images) the number of requests grows enough to slow down the load of the page. Many browsers have a low constraint of how many assets they will download simultaneously per domain. (In IE6 and 7, it's only two). In this case, we can serve the assets from multiple subdomains such as:
+
+    static1.otherdomain.com
+    static2.otherdomain.com
+    static3.otherdomain.com
+    
+#### Avoid IFRAMEs
+
+Iframes are the most costly element to add to a given page. They block the page from firing the onload event until they are complete. Sometimes they are useful to let another agency handle tracking scripts. For example the Doubleclick floodlight tag is an iframe, and the admin can add tracking pixels into it from their dashboard. In any case where an iframe is added, it should be appended to the DOM dynamically after window onload has fired.
+
+#### Measure performance during QA
+
+QA teams should also prioritize performance related tickets alongside visual, functional, and usability issues. Developers and QA should determine how that priority will be assigned. During QA, the success metrics should be tested regularly.
+
+Tools to test with:
+
+[YSlow](http://developer.yahoo.com/yslow/), [Page Speed](http://code.google.com/speed/page-speed/), [Hammerhead](http://stevesouders.com/hammerhead/), [PageTest](http://www.webpagetest.org/)
+
+When performance goals aren't met, there are three options:
+
+* Redevelop the code - profile, discover bottlenecks, refactor code, optimize to target faster execution in the browser.
+* Drop the feature - turn it off for slower browsers only.
+* Redesign approach of the UI - perhaps the design could use a tweak which would bypass the issue entirely.
+
+#### Browser Testing and Support
+
+Today's audience can choose from quite a large pool of web browsers, each providing a slightly (or dramatically) different experience. As developers, it is our responsibility to choose just how the web pages we build are displayed to those users.
+
+#### Search Engine Optimization
+
+An essential part of good web design and development is SEO. Well-structured code is the key to ensuring that a web page not only gets properly indexed by search engines, but made accessible to those with limited web capabilities as well.
+
+##### Be aware of SEO best practices
+
+* Print CSS best practices.
+* Site/app will fit according to Browser Resolution guidelines.
+* Site/app will be compatible with browser requirements described in Browser Testing and Support.
+* Be aware of Accessibility best practices, such as the 508 and WCAG standards:
+	* http://www.section508.gov
+	* http://www.w3.org/TR/WCAG20/.
+
+##### Indexability
+
+We must use semantic markup that's readable and logical when JavaScript and CSS are off. All page content must be in HTML; we don't want to use iframes or JavaScript for loading initial indexable content.
+All links should be to HTML destinations.
+
+```html
+<a href="/shelf/jordan/page/2" title="">
+```
+
+Instead of
+
+```html
+<a href="javascript:loadPage(2);" title="">
+```
+
+This lets the page get indexed correctly by search engines as well as allows users to open in new tabs and windows.
