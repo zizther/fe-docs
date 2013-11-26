@@ -474,4 +474,4 @@ However when extending a component and styling the inner elements, try to use th
 ### Comments
 
 * Comments should be used in CSS to separate the different section in the file, and highlight anything that you or other developers may require at a later date.
-* End each main block with ``css // END #tag_name `` or ``css // END .tag_name `` for easier readability.
+* End each main block with ``// END #tag_name`` or ``// END .tag_name`` for easier readability.

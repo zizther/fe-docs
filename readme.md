@@ -6,8 +6,8 @@
 
 This guide outlines best practices and guidelines for Maido. It is important that all developers follow this guide to keep consistency throughout all projects.
 
-[General](/general)
+[General](general.md)
 
-[HTML](/html)
+[HTML](html.md)
 
-[CSS / SASS](/css)
+[CSS / SASS](css.md)

@@ -64,18 +64,15 @@ Setting the character set using <meta> tags.
 * Use label fields to label each form field, the ``for=""`` attribute should associate itself with the input field ``id=""``, so users can click the labels. cursor: pointer; on the label is wise, as well.
 * Do not use the size attribute on your input fields. The size attribute is relative to the font size of the text inside the input. Instead use css width.
 * Place an html comment on some closing div tags to indicate what element you're closing. It will help when there is lots of nesting and indentation.
-```html
-<!-- / #tag_name -->
-<!-- / .tag_name -->
-```
+``<!-- / #tag_name -->`` and ``<!-- / .tag_name -->``
 * Only use one ``<h1>`` tag per page.
 * Always use title-case for headers and titles. Do not use all caps or all lowercase titles in markup, instead apply the CSS property ``text-transform: uppercase/lowercase``.
 * Place id's and class's before any other attribute on an element.
-```html
-<input class="form_input" id="name" name="name" type="text" value="">
-```
+``<input class="form_input" id="name" name="name" type="text" value="">``
 * Tables shouldn't be used for page layout.
 * Make use of ``<thead>``, ``<tbody>``, and ``<th>`` tags (and Scope attribute) when appropriate. 
+
+
 ```html
 <table summary="This is a chart of year-end returns for 2005.">
 	<thead>
@@ -97,6 +94,8 @@ Setting the character set using <meta> tags.
 
 * The HTML5 specification defines quotes around attributes as optional. For consistency with attributes that accept whitespace, all attributes should be quoted. 
 * Use double quotation marks (" ") rather than single (' ') for attribute values where necessary.
+
+
 ```html
 <p class="line note" data-attribute="106">This is my paragraph of special text.</p>
 ```
