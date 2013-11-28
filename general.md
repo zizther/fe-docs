@@ -1,6 +1,5 @@
-## HTML
+## General
 
-### General
 This guide outlines best practices and guidelines for Maido. It is important that all developers follow this guide to keep consistency throughout all projects.
 
 Any freelance or external developer will need to read this document and speak to a senior member of the digital team before he or she can start development. All work will be checked throughout the project by a member of the Maido digital team. All new projects should follow the boilerplate Maido uses, this can be [downloaded here](https://github.com/zizther/Jam).
