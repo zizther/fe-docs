@@ -179,7 +179,7 @@ During a page load, there is typically a lot of script waiting to execute, but y
 
 1. Script that changes the visible nature of the page needs to fire absolutely first. This includes any font adjustment or box layout.
 2. Page content initialization.
-3. Page header, topnav and footer initialization.
+3. Page header, top nav and footer initialisation.
 4. Attaching event handlers.
 5. Omniture, Doubleclick, and other 3rd party scripts.
 
@@ -192,6 +192,10 @@ Using sprites reduces total page weight and reduces HTTP connections which speed
 Many developers use a vertically-oriented sprite in addition to the primary sprite. This vertical sprite will be less than or equal to 100px wide (and tall) and contain icons that are typically placed next to text, such as list item bullets or call to action links and buttons.
 
 The one consideration is to not make sprites too large, something over 1000px in either direction will end up using a sizeable amount of memory. Read more on [when to use sprites and memory usage here](http://blog.vlad1.com/2009/06/22/to-sprite-or-not-to-sprite/), and for more general tips and techniques on creating sprites check out the [Mozilla Dev Blog](http://blog.mozilla.com/webdev/2009/03/27/css-spriting-tips/).
+
+#### Leverage CSS Sprites
+
+Sprites are not suitable for all situations. To guarentee icons look good on all devices and retina screens use custom webfonts or SVG's which give you more control.
 
 #### Shard resources across domains
 

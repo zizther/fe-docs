@@ -1,6 +1,7 @@
 # CSS
 
-Maido uses [SASS](http://sass-lang.com/) and [Compass](http://compass-style.org/).
+Use [SASS](http://sass-lang.com/) and [Compass](http://compass-style.org/).
+Object orientated CSS is the way to go!
 
 ---
 
@@ -25,6 +26,7 @@ Alphabetise the properties:
 ### Class and ID Names
 
 Class and ID names should be underscore not camel-case or dashes.
+Use underscores becuase it keeps to the same convention as SASS - Identifiers use underscores, where as variables and mixins, etc use dashes.
 
 ```css
 /* Good - Use underscores */
@@ -166,7 +168,7 @@ Declare `@extend` followed by `@include` statements first in a declaration block
     color: #555;
     @extend .company;
     font-size: 11px;
-    @include single-transition(all, 200ms, ease-out, 0s);
+    @include transition(all 200ms ease-out);
 }
 ```
 
@@ -424,10 +426,10 @@ No heights on anything that contains text. Components should be flexible and the
 
 /* Bad - dimension specified */
 .callout_content {
-    width: 200px;
-    height: 150px;
     border: 1px solid #ccc;
     background: #fff;
+    height: 150px;
+    width: 200px;
 }
 ```
 
@@ -453,25 +455,60 @@ When labelling elements within a component with a class, try to avoid generic cl
 }
 ```
 
-However when extending a component and styling the inner elements, try to use the base component's inner elements' class name for styling, instead of extending the class names of the inner elements as well.
-
-```css
-/* Good */
-.box_simple .box_hd {
-    background: #ccc;
-}
-.bo_simple .box_bd {
-    background: #ccc;
-}
-
-/* Avoid this if possible */
-.box_simple .box_simple_hd {
-    background: #ccc;
-}
-```
-
-
 ### Comments
 
 * Comments should be used in CSS to separate the different section in the file, and highlight anything that you or other developers may require at a later date.
 * End each main block with ``// END #tag_name`` or ``// END .tag_name`` for easier readability.
+
+## SASS & Compass
+
+### Filename convention
+
+All files which do not need to be compiled directly will have an _ [underscore] in front of them. This tells SASS to do nothing with them unless they are imported.
+
+
+### @extend
+The @extend directive can help avoid non-semantic style concerns by telling SASS that one selector should inherit the styles of another selector.
+One of the problems with @extend is it will indiscriminately extend every instance of a matching selector that it finds. So if you were extending .foo and it was referenced 5 times, it will extend those 5 references.
+
+The way to work with this is to create a silent class %foo. Example: ``.foo, %foo { color: red; }``
+A silent class should only ever exist once in any project. This means we can limit the reach of our @extends.
+
+Rules to follow:
+* Only write a given silent class once in your SASS.
+* Only ever @extend silent classes.
+* Use solid classes in markup, and as many times as you need in your SASS.
+
+A primary example of @extend being used is to extend the silent %clearfix class. We will not add uneccesary markup or classes to elements in the HTML files, we will extend this slient class where it is required in the CSS. This keeps everything tidy and makes it easier to manage.
+
+
+### @include
+
+@includes should appear above all CSS attributes but below @extends.
+You will use @includes mainly to call Compass or custom mixins.
+
+
+### Image name convention
+
+Anything put in the graphics folder use underscores in the filename, not dashes.
+We do this because it works with the Compass naming convention.
+
+If you had a 2 icons in a sprite and one was the hover state, you only need to put ‘_hover’ at the end of the file name [map_pin.png & map_pin_hover.png], Compass will automatically generate the code based on the file name, you don’t need to output anything or duplicate code.
+
+
+### Sprites
+Manage sprites using Compass. [Find out more here](http://compass-style.org/help/tutorials/spriting/).
+Also watch these videos to get a clear idea of how to work with sprites in Compass.
+
+* [Sprites in Compass](http://www.youtube.com/watch?v=Tl6bceyTjFw)
+* [Advanced sprite config](http://www.youtube.com/watch?v=8ZHZPxIjiS8)
+
+
+### Easing
+There is a variable file called _easing.scss which contains Robert Penner's easing functions converted into cubic-bezier timing functions. These will work with CSS3 transitons.
+
+Here is an example of this being used.
+
+```sass
+@include transition(all 500ms $easeOutQuart);
+```

@@ -1,10 +1,10 @@
 ## General
 
-This guide outlines best practices and guidelines for Maido. It is important that all developers follow this guide to keep consistency throughout all projects.
+This guide outlines best practices and guidelines. It is important that all developers follow this guide to keep consistency throughout all projects.
 
-Any freelance or external developer will need to read this document and speak to a senior member of the digital team before he or she can start development. All work will be checked throughout the project by a member of the Maido digital team. All new projects should follow the boilerplate Maido uses, this can be [downloaded here](https://github.com/zizther/Jam).
+Any freelance or external developer will need to read this document and speak to a senior member of the digital team before he or she can start development. All work will be checked throughout the project by a member of the Maido digital team. All new projects should follow the front-end boilerplate, this can be [downloaded here](https://github.com/zizther/Jam).
 			
-A good guide to follow is the [YUI best practice](http://developer.yahoo.com/performance/rules.html).
+A good guide start with is is the [YUI best practice](http://developer.yahoo.com/performance/rules.html).
 		
 #### Website aims
 When developing a website, keep these points in mind:
@@ -16,7 +16,7 @@ When developing a website, keep these points in mind:
 * It must have a good user experience
 * It must be easy to navigate
 * Think about user perception
-* Cross browser developed to IE8 (IE7 if required)
+* Cross browser developed to IE9 (IE* & IE7 if required)
 * Make sure your editor uses UTF-8 as character encoding, without a byte order mark
 * Be consistent
 			
