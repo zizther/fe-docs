@@ -7,14 +7,14 @@ This document's primary motivation is two- fold: 1) code consistency and 2) best
 
 ## General Guidelines
 
-* For all code languages, using tab (4 spaces)indentation.
+* For all code languages, using tab (4 spaces) indentation.
 * There is no need to compress HTML.
 * Start any project using HTML5. Make sure you understand meaning and use of the new tags, read the documentation!
 * Lowercase should be used throughout.
-* Underscore should be used for classes and unique identifiers; no dashes or camel-casing.
+* Underscore should be used for classes and unique identifiers; no dashes and definitely no camel-casing.
 * Place all style images in the 'graphics' directory.
 * Try to keep HTTP request down to a minimum.
-* Always optimise images for web. Optmise them using a program like Codekit or use something like [smushit.com](http://www.smushit.com) (provided by Yahoo!).
+* Always optimise images for web. Optmise them using a program like TinyPNG or use something like [smushit.com](http://www.smushit.com) (provided by Yahoo!).
 * Google analytics should be placed before ``</head>``.
 * Where possible, use other CDNs to deliver content, such as Google code to delivery jQuery.
 * Make favicon small and cacheable.

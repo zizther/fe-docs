@@ -11,5 +11,3 @@ This guide outlines best practices and guidelines. It is important that all deve
 [HTML](html.md)
 
 [CSS / SASS](css.md)
-
-[JavaScript](css.md)
