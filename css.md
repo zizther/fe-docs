@@ -1,7 +1,8 @@
 # CSS
 
-Use [SASS](http://sass-lang.com/) and [Compass](http://compass-style.org/).
-Object orientated CSS is the way to go!
+Use [SASS](http://sass-lang.com/).
+Styling pattern: [BEM](http://getbem.com/)
+If using utility based classes use [Tailwindcss](https://tailwindcss.com/)
 
 ---
 
@@ -41,7 +42,7 @@ Use underscores becuase it keeps to the same convention as SASS - Identifiers us
 
 ### Indentation
 
-Each indentation level is made up of four spaces. Do not use tabs. (Please set your editor to use four spaces)
+Each indentation level is made up of four spaces. Do not use tabs. All projects will have an `.editorconfig` file, make sure your editor is setup to use it
 
 ```css
 /* Good */
@@ -54,11 +55,11 @@ Each indentation level is made up of four spaces. Do not use tabs. (Please set y
 .tag_name {color: #fff; background-color: #000;}
 ```
 
-Rules inside of ``@media`` must be indented an additional level.
+Rules inside of `@media` must be indented an additional level.
 
 ```css
 /* Good */
-@media screen and (max-width:480px) {
+@media only screen and (max-width:480px) {
    .tag_name {
        color: green;
    }
@@ -112,7 +113,7 @@ Each property must be on its own line and indented one level. There should be no
 
 ### Using CSS Preprocessors (SASS)
 
-Keep nesting to 3 levels deep. 
+Keep nesting to 3 levels deep where possible. 
 
 ```scss
 /* Good */
@@ -157,8 +158,8 @@ Declare `@extend` followed by `@include` statements first in a declaration block
 ```scss
 /* Good */
 .tag_name {
-    @extend .company;
-    @include single-transition(all, 200ms, ease-out, 0s);
+    @extend %padding;
+    @include size(100px, 200px);
     color: #555;
     font-size: 11px;
 }
@@ -166,51 +167,32 @@ Declare `@extend` followed by `@include` statements first in a declaration block
 /* Bad */
 .tag_name {
     color: #555;
-    @extend .company;
+    @extend %padding;
     font-size: 11px;
-    @include transition(all 200ms ease-out);
+    @include size(100px, 200px);
 }
 ```
 
 ### Vendor-Prefixed Properties
 
-When using vendor-prefixed properties, always use the standard property as well. The standard property must always come after all of the vendor-prefixed versions of the same property.
+No need to include vendor prefoxes, all CSS assets in this project will go through Autoprefixer which will determine which vendor-prefixes to add.
+This allows the src files to be minimal and allows developers to focus on the styling and less about browser support.
 
 ```css
+/* Good */
+.tag_name {
+    border-radius: 4px;
+}
+```
+
+```css
+/* Bad */
 .tag_name {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
 }
 ```
-
-If a vendor prefixed property is used, -moz, -webkit, -o, -ms vendor prefixes should also be used. Vendor-prefixed classes should align to the left with all other properties.
-
-```css
-/* Good */
--moz-border-radius: 4px;
--webkit-border-radius: 4px;
-border-radius: 4px;
-
-/* Bad - colons aligned */
--moz-border-radius:4px;
-	-webkit-border-radius:4px;
-        border-radius:4px;
-```
-
-Suffix property value pairs that apply only to a particular browser or class of browsers with a comment listing browsers affected.
-
-```css
-background: #fcfcfc; /* Old browsers */
-background: -moz-linear-gradient(...); /* FF3.6+ */
-background: -ms-linear-gradient(...); /* IE10+ */
-background: -o-linear-gradient(...); /* Opera 11.10+ */
-background: -webkit-gradient(...); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(...); /* Chrome10+,Safari5.1+ */
-background: linear-gradient(...); /* W3C */
-```
-
-Suffix fallback with “Old browsers” and standard property with “W3C”. Add a plus or minus to indicate that a property applies to all previous browsers by the same vendor or all future browsers by the same vendor.
 
 ### Using !important
 
@@ -230,12 +212,11 @@ Try to not use !important on CSS properties. The only time this is allowed is in
 
 ### Font Sizing
 
-All font sizes must be specified using rem only with a pixel fall back. Do not use percentages, ems or pixels alone.
+All font sizes must be specified using rem only. Do not use percentages, ems or pixels alone.
 
 ```css
 /* Good */
 .tag_name {
-   font-size: 14px; /* pixel fall back rule should come first */
    font-size: 1.4rem;
 }
 
@@ -249,7 +230,7 @@ All font sizes must be specified using rem only with a pixel fall back. Do not u
    font-size: 86%;
 }
 
-/* Bad - uses pixel only */
+/* Bad - uses pixel */
 .tag_name {
    font-size: 14px;
 }
@@ -257,7 +238,7 @@ All font sizes must be specified using rem only with a pixel fall back. Do not u
 
 ### HEX value
 
-When declaring HEX values, use lowercase and shorthand (where possible)
+When declaring HEX values, use lowercase and shorthand (where possible). The CSS assets are optimised for shorthand, however it is nice to have consistency.
 
 ```css
 /* Good */
@@ -289,7 +270,7 @@ Strings should always use double quotes (never single quotes).
 
 ### Background Images and Other URLs
 
-When using a url() value, always use quotes around the actual URL. 
+When using a url() value, always use quotes around the actual URL, this helps cases where some characters need to be escaped.
 
 ```css
 /* Good */
@@ -341,26 +322,6 @@ Zero values do not require named units, omit the “px” or other unit.
 }
 ```
 
-### Internet Explorer Hacks
-
-Only property hacks are allowed. To target Internet Explorer, use Internet Explorer-specific hacks like * and _ in the normal CSS files. Browser specific styles should not be in separate per-browser stylesheets. We prefer to keep all the CSS for a particular object in one place as it is more maintainable. In addition selector hacks should not be used. Classes like .ie6 increase specificity. Hacks should be kept within the CSS rule they affect and only property hacks should be used.
-
-```css
-/* Good */
-.tag_name {
-   margin: 0;
-   _margin: -1px;
-}
-
-/* Bad - uses selector hacks */
-.tag_name {
-   margin: 0px;
-}
-.ie6 .tag_name {
-   margin: -1px;
-}
-```
-
 ### Selectors
 
 Each selector should appear on its own line. The line should break immediately after the comma. Each selector should be aligned to the same left column.
@@ -375,22 +336,6 @@ input.button {
 /* Bad - selectors one on line */
 button, input.button {
    color: red;
-}
-```
-
-### JavaScript Dependence
-
-All rules should be coded to expect JavaScript to be enabled. Rules that apply when JavaScript is disabled should be preceded by the noJS class.
-
-```css
-/* Good */
-.no-js .calloutContent {
-   display:block;
-}
-
-/* Bad - don't use .js */
-.js .calloutContent{
-   display: none;
 }
 ```
 
@@ -410,8 +355,6 @@ a:hover {
    color: green;
 }
 ```
-
-The author field should contain the username of the person who first created the file. Subsequent authors or primary maintainers may also choose to add their name. The browsers in which this file was tested should be listed next to @tested.
 
 ### Width and height on components
 
@@ -435,15 +378,17 @@ No heights on anything that contains text. Components should be flexible and the
 
 ### Naming classes
 
-When labelling elements within a component with a class, try to avoid generic classes like ``.inner``, ``.hd``, ``.bd``. Instead, prefix the class name with the name of the component. This is to avoid CSS getting overwritten when classes are too generic.
+When labelling elements within a component with a class, try to avoid generic classes like `.inner`, `.hd`, `.bd`. Instead, prefix the class name with the name of the component. This is to avoid CSS getting overwritten when classes are too generic.
 
 ```css
 /* Good */
-.box_hd {
-    background: #ccc;
-}
-.box_bd {
-    background: #ccc;
+.box{
+    &__hd {
+        background: #ccc;
+    }
+    &__bd {
+        background: #ccc;
+    }
 }
 
 /* Bad */
@@ -458,9 +403,8 @@ When labelling elements within a component with a class, try to avoid generic cl
 ### Comments
 
 * Comments should be used in CSS to separate the different section in the file, and highlight anything that you or other developers may require at a later date.
-* End each main block with ``// END #tag_name`` or ``// END .tag_name`` for easier readability.
 
-## SASS & Compass
+## SASS
 
 ### Filename convention
 
@@ -471,12 +415,12 @@ All files which do not need to be compiled directly will have an _ [underscore] 
 The @extend directive can help avoid non-semantic style concerns by telling SASS that one selector should inherit the styles of another selector.
 One of the problems with @extend is it will indiscriminately extend every instance of a matching selector that it finds. So if you were extending .foo and it was referenced 5 times, it will extend those 5 references.
 
-The way to work with this is to create a silent class %foo. Example: ``.foo, %foo { color: red; }``
+The way to work with this is to create a silent class %foo. Example: `.foo, %foo { color: red; }`
 A silent class should only ever exist once in any project. This means we can limit the reach of our @extends.
 
 Rules to follow:
 * Only write a given silent class once in your SASS.
-* Only ever @extend silent classes.
+* Only ever @extend silent classes, unless the class is actually being used for styling.
 * Use solid classes in markup, and as many times as you need in your SASS.
 
 A primary example of @extend being used is to extend the silent %clearfix class. We will not add uneccesary markup or classes to elements in the HTML files, we will extend this slient class where it is required in the CSS. This keeps everything tidy and makes it easier to manage.
@@ -485,23 +429,7 @@ A primary example of @extend being used is to extend the silent %clearfix class.
 ### @include
 
 @includes should appear above all CSS attributes but below @extends.
-You will use @includes mainly to call Compass or custom mixins.
-
-
-### Image name convention
-
-Anything put in the graphics folder use underscores in the filename, not dashes.
-We do this because it works with the Compass naming convention.
-
-If you had a 2 icons in a sprite and one was the hover state, you only need to put ‘_hover’ at the end of the file name [map_pin.png & map_pin_hover.png], Compass will automatically generate the code based on the file name, you don’t need to output anything or duplicate code.
-
-
-### Sprites
-Manage sprites using Compass. [Find out more here](http://compass-style.org/help/tutorials/spriting/).
-Also watch these videos to get a clear idea of how to work with sprites in Compass.
-
-* [Sprites in Compass](http://www.youtube.com/watch?v=Tl6bceyTjFw)
-* [Advanced sprite config](http://www.youtube.com/watch?v=8ZHZPxIjiS8)
+You will use @includes mainly to call mixins.
 
 
 ### Easing
@@ -509,6 +437,22 @@ There is a variable file called _easing.scss which contains Robert Penner's easi
 
 Here is an example of this being used.
 
-```sass
-@include transition(all 500ms $easeOutQuart);
+```css
+transition: all .5s $easeOutQuart;
 ```
+
+### Durations
+For consistency it is better to use durations in seconds, rather than milliseconds.
+
+```css
+/* Good */
+.element {
+    transition: all .5s $easeOutQuart;
+}
+
+/* Bad */
+.element {
+    transition: all 500ms $easeOutQuart;
+}
+```
+
