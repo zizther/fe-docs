@@ -14,15 +14,15 @@ This document's primary motivation is two- fold: 1) code consistency and 2) best
 * Underscore should be used for classes and unique identifiers; no dashes and definitely no camel-casing.
 * Place all style images in the 'graphics' directory.
 * Try to keep HTTP request down to a minimum.
-* Always optimise images for web. Optmise them using a program like TinyPNG or use something like [smushit.com](http://www.smushit.com) (provided by Yahoo!).
-* Google analytics should be placed before ``</head>``.
+* Always optimise images for web.
+* Google analytics should be placed before `</head>`.
 * Where possible, use other CDNs to deliver content, such as Google code to delivery jQuery.
 * Make favicon small and cacheable.
 * Minimize the number of iframes.
 * Don't scale images in HTML, unless they are responsive, do not use oversized images though.
 * Optimise images; some images can be exported smaller as a .png over a .jpg. Look to see what is best.
 * Use .png over .gif
-* Avoid empty image ``src=""`` tags.
+* Avoid empty image `src=""` tags.
 * Conditional Comments can be used, but not because you’re lazy.
 	
 ```html
@@ -58,35 +58,35 @@ Setting the character set using <meta> tags.
 
 ## Markup Guidelines
 
-* Use actual ``<p>`` elements for paragraph delimiters as opposed to multiple ``<br>`` tags.
-* Make use of ``<dl>`` (definition lists) and ``<blockquote>``, when appropriate.
-* Items in list form should always be housed in a UL, OL, or DL, never a set of ``<div>`` or ``<p>`` tags.
-* Use label fields to label each form field, the ``for=""`` attribute should associate itself with the input field ``id=""``, so users can click the labels. cursor: pointer; on the label is wise, as well.
+* Use actual `<p>` elements for paragraph delimiters as opposed to multiple `<br>` tags.
+* Make use of `<dl>` (definition lists) and `<blockquote>`, when appropriate.
+* Items in list form should always be housed in a UL, OL, or DL, never a set of `<div>` or `<p>` tags.
+* Use label fields to label each form field, the =`for=""` attribute should associate itself with the input field `id=""`, so users can click the labels. cursor: pointer; on the label is wise, as well.
 * Do not use the size attribute on your input fields. The size attribute is relative to the font size of the text inside the input. Instead use css width.
 * Place an html comment on some closing div tags to indicate what element you're closing. It will help when there is lots of nesting and indentation.
-``<!-- / #tag_name -->`` and ``<!-- / .tag_name -->``
-* Only use one ``<h1>`` tag per page.
-* Always use title-case for headers and titles. Do not use all caps or all lowercase titles in markup, instead apply the CSS property ``text-transform: uppercase/lowercase``.
+`<!-- / #tag_name -->` and `<!-- / .tag_name -->`
+* Only use one `<h1>` tag per page.
+* Always use title-case for headers and titles. Do not use all caps or all lowercase titles in markup, instead apply the CSS property `text-transform: uppercase/lowercase`.
 * Place id's and class's before any other attribute on an element.
-``<input class="form_input" id="name" name="name" type="text" value="">``
+`<input class="form_input" id="name" name="name" type="text" value="">`
 * Tables shouldn't be used for page layout.
-* Make use of ``<thead>``, ``<tbody>``, and ``<th>`` tags (and Scope attribute) when appropriate. 
+* Make use of `<thead>`, `<tbody>`, and `<th>` tags (and Scope attribute) when appropriate. 
 
 
 ```html
 <table summary="This is a chart of year-end returns for 2005.">
-	<thead>
-		<tr>
-			<th scope="col">Table header 1</th>
-			<th scope="col">Table header 2</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Table data 1</td>
-			<td>Table data 2</td>
-		</tr>
-	</tbody>
+    <thead>
+        <tr>
+            <th scope="col">Table header 1</th>
+            <th scope="col">Table header 2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Table data 1</td>
+            <td>Table data 2</td>
+        </tr>
+    </tbody>
 </table>
 ```
 
@@ -105,9 +105,9 @@ Setting the character set using <meta> tags.
 
 #### General Coding Principles
 
-* Add CSS through external files, minimizing the # of files, if possible. It should always be in the HEAD of the document.
-* Put style sheets at the top in ``<head>``.
-* Use the ``<link>`` tag to include, never the @import.
+* Add CSS through external files, minimizing the number of files, if possible.
+* Put stylesheets at the top in `<head>`.
+* Use the `<link>` tag to include, never the @import.
 * Don't include styles inline in the document, either in a style tag or on the elements. It's harder to track down style rules.
 
 #### Prevent Compatibility Mode
@@ -133,24 +133,23 @@ When using @font-face it's recommended to declare the source for each font forma
 
 The font formats included in the specification are:
 
+* **woff2**: WOFF2 (Web Open Font Format)
 * **woff**: WOFF (Web Open Font Format)
 * **ttf**: TrueType
 * **ttf, otf**: OpenType
 * **eot**: Embedded OpenType
 * **svg, svgz**: SVG Font
 
-[Bulletproof @font-face](http://www.fontspring.com/blog/further-hardening-of-the-bulletproof-syntax)
+If you are only supporting modern browsers, the you will only require the WOFF formats.
 
-Use either Typekit or Google WebFonts. Don't use Cufon or Scalable Inman Flash Replacement (sIFR).
+It is also ideal to support `font-display: swap;` within your @font-face.
 
-Be aware of FOUC/FOUT (Flash of unstyled content/text). Read more about this:
-[Typekit](http://help.typekit.com/customer/portal/articles/6852-controlling-the-flash-of-unstyled-text-or-fout-using-font-events)
-[Paul Irish](http://www.paulirish.com/2009/fighting-the-font-face-fout/)
+When using Use either Typekit or Google WebFonts, `font-display: swap;` is handled by default now.
 
 
 ## Accessibility
 
-The HTML mark-up should comply with [UK web accessibility law](http://www.rnib.org.uk/professionals/webaccessibility/lawsandstandards/Pages/uk_law.aspx) and should follow the [Web Content Accessibility Guidelines](http://www.w3.org/WAI/intro/wcag) as closely as possible.
+The HTML mark-up should comply with [UK web accessibility law](https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps) and should follow the [Web Content Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/) as closely as possible.
 
 [W3C checklist of checkpoints for accessibility](http://www.w3.org/TR/WCAG10/full-checklist.html)
 
@@ -166,12 +165,12 @@ There are many optimisations that should be done for serving CSS and javascript 
 * Optimse images for web.
 * Set caching headers appropriately.
 * Consider a cookie-less subdomain for static assets
-* Avoid inline ``<script>`` blocks. They block rendering and are quite devastating to page load time.
+* Avoid inline `<script>` blocks. They block rendering and are quite devastating to page load time.
 * Avoid calling JS function inline.
-* CSS should be located in the ``<head>`` of the document, Javascript should be right before the ``</body>`` tag.
+* CSS should be located in the `<head>` of the document, Javascript should be right before the `</body>` tag.
 * Both CSS and JavaScript should be served minified.
 * Both should be served using gzip on the wire.
-* Reduce the number of HTTP requests.
+* Reduce the number of HTTP requests, with the use of HTTP/2 we can be a little more lenient towards having multiple assets file
 
 #### Optimize JavaScript execution
 
@@ -183,22 +182,11 @@ During a page load, there is typically a lot of script waiting to execute, but y
 4. Attaching event handlers.
 5. Omniture, Doubleclick, and other 3rd party scripts.
 
-#### Leverage CSS Sprites
-
-CSS Sprites basically take a number of image assets and merge them together into a singular image file. Each part of it is revealed using CSS background-position.
-
-Using sprites reduces total page weight and reduces HTTP connections which speeds up page load.
-
-Many developers use a vertically-oriented sprite in addition to the primary sprite. This vertical sprite will be less than or equal to 100px wide (and tall) and contain icons that are typically placed next to text, such as list item bullets or call to action links and buttons.
-
-The one consideration is to not make sprites too large, something over 1000px in either direction will end up using a sizeable amount of memory. Read more on [when to use sprites and memory usage here](http://blog.vlad1.com/2009/06/22/to-sprite-or-not-to-sprite/), and for more general tips and techniques on creating sprites check out the [Mozilla Dev Blog](http://blog.mozilla.com/webdev/2009/03/27/css-spriting-tips/).
-
-#### Leverage CSS Sprites
-
-Sprites are not suitable for all situations. To guarentee icons look good on all devices and retina screens use custom webfonts or SVG's which give you more control.
-
 #### Shard resources across domains
 
+*Note* With HTTP/2 we don't need to worry about domain sharding, as it does not block head of line.
+
+*Reference for HTTP/1.1*
 Static content should certainly be served from a domain different than the one that serves HTML. This is optimal so that there are no extra cookies headers on all static content requests. It's also much easier to write caching rules for the entire domain. (Also any subdomains of the current domain will inherit domain cookies, so it's worth using a completely new domain).
 
 However with enough assets (especially images) the number of requests grows enough to slow down the load of the page. Many browsers have a low constraint of how many assets they will download simultaneously per domain. (In IE6 and 7, it's only two). In this case, we can serve the assets from multiple subdomains such as:
@@ -214,10 +202,6 @@ Iframes are the most costly element to add to a given page. They block the page 
 #### Measure performance during QA
 
 QA teams should also prioritize performance related tickets alongside visual, functional, and usability issues. Developers and QA should determine how that priority will be assigned. During QA, the success metrics should be tested regularly.
-
-Tools to test with:
-
-[YSlow](http://developer.yahoo.com/yslow/), [Page Speed](http://code.google.com/speed/page-speed/), [Hammerhead](http://stevesouders.com/hammerhead/), [PageTest](http://www.webpagetest.org/)
 
 When performance goals aren't met, there are three options:
 
@@ -239,8 +223,8 @@ An essential part of good web design and development is SEO. Well-structured cod
 * Site/app will fit according to Browser Resolution guidelines.
 * Site/app will be compatible with browser requirements described in Browser Testing and Support.
 * Be aware of Accessibility best practices, such as the 508 and WCAG standards:
-	* http://www.section508.gov
-	* http://www.w3.org/TR/WCAG20/.
+	* [http://www.section508.gov](http://www.section508.gov)
+	* [http://www.w3.org/TR/WCAG20/](http://www.w3.org/TR/WCAG20/)
 
 ##### Indexability
 
